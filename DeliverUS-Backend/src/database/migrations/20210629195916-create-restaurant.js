@@ -32,8 +32,7 @@ module.exports = {
         allowNull: false
       },
       averageSeviceMinutes: {
-        type: Sequelize.DOUBLE,
-        allowNull: true
+        type: Sequelize.DOUBLE
       },
       email: {
         type: Sequelize.STRING,
@@ -52,7 +51,8 @@ module.exports = {
         allowNull: true
       },
       status: {
-        type: Sequelize.ENUMERATE('online', 'offline', 'closed', 'temporarly closed'),
+        type: Sequelize.ENUM,
+        values: ['online', 'offline', 'closed', 'temporarly closed'],
         allowNull: false
       },
       createdAt: {
@@ -62,6 +62,26 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      restaurantCategoryId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'RestaurantCategories'
+          },
+          key: 'id'
+        }
+      },
+      userId: {
+        allowNull: false,
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: 'Users'
+          },
+          key: 'id'
+        }
       }
     })
   },
